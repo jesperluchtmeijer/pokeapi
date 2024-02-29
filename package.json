@@ -1,0 +1,27 @@
+{
+  "name": "pokemon-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "server": "node ./server/bin/www",
+    "dev": "nodemon ./server/bin/www"
+  },
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^9.4.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "express": "~4.16.1",
+    "fetch": "^1.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "~1.9.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
