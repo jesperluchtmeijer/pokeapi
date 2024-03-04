@@ -1,5 +1,5 @@
 import express from "express";
-import {fetchAndSavePokemon, getPokemon, showPokemon} from "../controllers/pokemonController.js";
+import {fetchAndSavePokemon, getPokemon, showPokemon, getPokemonByName} from "../controllers/pokemonController.js";
 
 const router = express.Router();
 
@@ -32,6 +32,20 @@ router.get('/show-pokemon/:id', async (req, res) => {
         res.json(pokemon);
     } catch (error) {
         console.error(`Error occurred while handling request for Pokemon with ID ${pokemonId}:`, error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/show-pokemon-name/:name', async (req, res) => {
+    try {
+        const pokemonName = req.params.name;
+        const pokemon = await getPokemonByName(pokemonName);
+        if (!pokemon) {
+            return res.status(404).json({ error: `Pokemon with ID ${pokemonName} not found` });
+        }
+        res.json(pokemon);
+    } catch (error) {
+        console.error(`Error occurred while handling request for Pokemon with Name ${pokemonName}:`, error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

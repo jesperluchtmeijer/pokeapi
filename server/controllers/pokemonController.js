@@ -109,6 +109,17 @@ async function getPokemon(pokemonId) {
     }
 }
 
+async function getPokemonByName(pokemonName) {
+    try {
+        const pokemons = await db.prepare(`SELECT * FROM pokemons WHERE name LIKE '%' || ? || '%'`).all(pokemonName);
+        return pokemons;
+
+    } catch (error) {
+        console.error(`Error occurred while fetching Pokemon with name ${pokemonName} from database:`, error);
+        throw error;
+    }
+}
+
 // async function savePokemonAbility(pokemonData, abilityData) {
 //     try {
 //         const pokemonId = await db.prepare("SELECT pokemon_api_id FROM pokemons WHERE pokemon_api_id = ?").pluck().get(pokemonData.id);
@@ -132,4 +143,4 @@ async function getPokemon(pokemonId) {
 //     }
 // }
 
-export { fetchAndSavePokemon, showPokemon, getPokemon };
+        export { fetchAndSavePokemon, showPokemon, getPokemon, getPokemonByName };
