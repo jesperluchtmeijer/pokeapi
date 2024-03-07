@@ -1,12 +1,17 @@
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
+
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index.js';
 import pokemonRouter from './routes/pokemonRoute.js';
+import AuthRouter from './routes/AuthRouter.js';
+import passport from 'passport';
+import passportConfig from './passportConfig.js';
+import FavoriteRouter from './routes/FavoriteRoute.js';
 
-var app = express();
+const app = express();
+passportConfig(passport);
+app.use(passport.initialize());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -14,15 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/pokemon', pokemonRouter);
+app.use('/auth', AuthRouter);
+app.use('/favorite', FavoriteRouter);
 
 
 
 
-//
-// const db = new Database(path.dirname(fileURLToPath(import.meta.url)) + '/../pokemon.db', {fileMustExist: true});
-
-import {v4 as uuidv4} from 'uuid';
-
-uuidv4();
 
 export default app;
