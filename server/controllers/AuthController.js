@@ -57,6 +57,16 @@ class AuthController{
 
 
     }
-}
 
+    async getAllUsers(req, res){
+        try {
+            const users = db.prepare("SELECT * FROM users").all();  
+            res.json(users);
+        } catch (error) {
+            console.error('Error occurred while getting all users:', error);
+            res.status(500).json({ message: 'An error occurred while getting all users' });
+        }
+    }
+
+}
 export default AuthController;

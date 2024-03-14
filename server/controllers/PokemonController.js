@@ -72,7 +72,7 @@ class PokemonController {
         try {
             const pokemons = db.prepare("SELECT * FROM pokemons").all();
             console.log(pokemons);
-            res.status(200).json({message: "JOOOO", pokemons});
+            res.status(200).json(pokemons);
         } catch (error) {
             console.error('Error occurred while fetching Pokemon from database:', error);
             throw error;

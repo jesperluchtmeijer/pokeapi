@@ -31,7 +31,7 @@ class FavoriteController {
             const userId = req.user.id;
             const getFavorites = db.prepare("SELECT * FROM user_pokemon_favorite WHERE user_id = ?");
             const favorites = getFavorites.all(userId);
-            res.json({favorites});
+            res.json(favorites);
         } catch (error) {
             console.error('Error occurred while getting favorites:', error);
             res.status(500).json({message: 'An error occurred while getting favorites'});
@@ -42,7 +42,7 @@ class FavoriteController {
             const pokemonId = req.params.id;
             const userId = req.user.id;
 
-            const removeFromFavorites = db.prepare("DELETE FROM user_pokemon_favorite WHERE user_id = ? AND pokemon_id = ?");
+            const removeFromFavorites = db.prepare("DELETE FROM user_pokemon_favorite WHERE user_id = ? AND id = ?");
             removeFromFavorites.run(userId, pokemonId);
             res.json({message: 'Pokemon removed from favorites successfully'});
         } catch (error) {

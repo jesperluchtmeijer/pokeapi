@@ -8,10 +8,12 @@ import AuthRouter from './routes/AuthRouter.js';
 import passport from 'passport';
 import passportConfig from './passportConfig.js';
 import FavoriteRouter from './routes/FavoriteRoute.js';
+import cors from 'cors'
 
 const app = express();
 passportConfig(passport);
 app.use(passport.initialize());
+app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());

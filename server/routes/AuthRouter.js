@@ -14,4 +14,7 @@ router.get('/auth', passport.authenticate('jwt', {session: false}), function (re
 
 });
 
+router.get('/users', authController.getAllUsers);
+
+
 export default router;
